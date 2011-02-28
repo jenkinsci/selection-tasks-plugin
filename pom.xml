@@ -8,7 +8,7 @@
   </parent>
 
   <artifactId>selection-tasks-plugin</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>1.0</version>
   <name>Selection tasks plugin</name>
   <description>This plugin adds new variable. You may select several tasks (for example, Selenium tests) for run.</description>
   <url>http://wiki.jenkins-ci.org/display/JENKINS/Selection+Tasks+Plugin</url>
@@ -45,8 +45,9 @@
   </build>
   
   <scm>
-    <connection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/plugins/selection-tasks-plugin</connection>
-    <developerConnection>scm:svn:https://svn.jenkins-ci.org/trunk/hudson/plugins/selection-tasks-plugin</developerConnection>
+    <connection>scm:svn:https://svn.jenkins-ci.org/tags/selection-tasks-plugin-1.0</connection>
+    <developerConnection>scm:svn:https://svn.jenkins-ci.org/tags/selection-tasks-plugin-1.0</developerConnection>
+    <url>https://hudson.dev.java.net/source/browse/hudson/tags/selection-tasks-plugin-1.0</url>
   </scm>
   
 </project>
