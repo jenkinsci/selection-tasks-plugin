@@ -1,0 +1,104 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form"
+	xmlns:i="jelly:fmt" xmlns:p="/lib/hudson/project">
+<!--***************************************************************************-->
+<!--Legend-->
+	<f:optionalBlock name="dynamic" title="Show output of script">
+		<f:entry>
+			<f:textarea value="${it.getSaveScriptFile()}" />
+		</f:entry>
+	</f:optionalBlock>
+<!--***************************************************************************-->
+<!--JavaScript-->
+<script language="JavaScript">
+	var myArrayTestSelection = new Array();
+	var sizeMyArray = 0;
+
+    function recur() {
+    	
+    }
+    function checkBlocking(a) {
+    	var currDeep = 0;
+    	for(keyVar in myArray){
+    		if( myArray[keyVar] == "[" ) {
+    			currDeep++;
+    		}
+    		if( myArray[keyVar] == "]" ) {
+    			currDeep--;
+    		}
+    		//alert(myArray[keyVar] + " = " + currDeep);
+    	}
+    	//alert(currDeep);
+    }
+    function addNode(node) {
+    	myArray[sizeMyArray] = node;
+    	sizeMyArray++;
+    }
+    function clickChildren(name, elem, delim, parent) {
+		var children = document.getElementsByTagName('input');
+		
+		for(child in children) {
+			if (children[child].type == 'checkbox') {
+				var id = children[child].id;
+				
+				var str;
+				if (parent == "") {
+					str = name;
+				} else {
+					str = parent + delim + name;
+				}
+				
+				if (id.indexOf(str) != -1) {
+            		children[child].checked = elem.checked;
+            	}
+        	}
+		}
+	}
+</script>
+
+<!--***************************************************************************-->
+<!--Task tree-->		    
+	<f:entry title="${it.name}" description="${it.description}">
+		<div name="parameter" description="${it.description}">
+			<input type="hidden" name="name" value="${it.name}" />
+		    <p>
+			    <j:forEach items="${it.getExpr()}" var="i">
+					<j:switch on="${i.type}">
+						<j:case value="~">
+					    	<font size="4" color="red">
+					    		${i.name}
+					    	</font>
+					   	</j:case>
+						<j:case value="[">
+					    	<j:set var="result" value="${it.plusDeep()}"/>
+							<script language="JavaScript">
+								addNode('[');
+							</script>
+					   	</j:case>
+					   	<j:case value="]">
+					   		<j:set var="result" value="${it.minusDeep()}"/>
+							<script language="JavaScript">
+								addNode(']');
+							</script>
+					   	</j:case>
+					   	<j:default>
+							<j:set var="open" value="${it.getCurrentOffsetOpen()}"/>
+							<j:set var="close" value="${it.getCurrentOffsetClose()}"/>
+				
+							${open}
+								<f:checkbox name="${i.variableName}" id="CB${i.parent+i.variableName}" checked="${i.check}"
+									onclick="clickChildren('${i.name}', this, '${it.getNodeDelimSymbol()}', '${i.parent}')"/>
+								${i.name}
+								<script language="JavaScript">
+									addNode('${i.variableName}');
+								</script>
+							${close}
+						</j:default>
+					</j:switch>
+			    </j:forEach>
+	    	</p>
+<!--***************************************************************************-->
+<!--***************************************************************************-->
+		</div>
+	</f:entry>
+</j:jelly>

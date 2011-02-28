@@ -1,0 +1,50 @@
+<j:jelly xmlns:j="jelly:core" xmlns:st="jelly:stapler" xmlns:d="jelly:define"
+	xmlns:l="/lib/layout" xmlns:t="/lib/hudson" xmlns:f="/lib/form"
+	xmlns:i="jelly:fmt" xmlns:p="/lib/hudson/project">
+
+    <f:entry title="${%Name of variable}" 
+             field="name">
+		<f:textbox value="${instance.getName()}" />
+	</f:entry>
+
+	<f:entry title="${%Path}" 
+			 field="path"
+			 help="/plugin/selection-tasks-plugin/help-path.html">
+		<f:textbox value="${instance.getPath()}" />
+	</f:entry>
+
+    <f:entry title="${%Delimiter symbol for tests}" 
+    		 field="testDelimSymbol"
+			 help="/plugin/selection-tasks-plugin/help-testDelimSymbol.html">
+        <f:textbox value="${instance.getTestDelimSymbol()}" />
+    </f:entry>
+        
+    <f:entry title="${%Delimiter symbol for nodes}" 
+    		 field="nodeDelimSymbol"
+			 help="/plugin/selection-tasks-plugin/help-nodeDelimSymbol.html">
+        <f:textbox value="${instance.getNodeDelimSymbol()}" />
+    </f:entry>
+
+    <f:entry title="${%Count of delimiter symbol}" 
+    	     field="countDelimiterSymbol"
+			 help="/plugin/selection-tasks-plugin/help-countDelimiterSymbol.html">
+        <f:textbox value="${it.getCountDelimiterSymbol()}"/>
+    </f:entry>
+
+	<f:entry title="${%Delimiter symbol}" 
+			 field="delimiter"
+			 help="/plugin/selection-tasks-plugin/help-delimiterSymbol.html">
+        <f:textbox value="${instance.getDelimiter()}" />
+    </f:entry>
+    
+    <f:entry title="${%Default value}" 
+    		 field="defaultValue"
+			 help="/plugin/selection-tasks-plugin/help-defaultValue.html">
+        <f:textbox value="${instance.getDefaultValue()}" />
+    </f:entry>
+
+    <f:entry title="${%Description}" field="description">
+        <f:textarea value="${instance.getDescription}" />
+    </f:entry>
+    
+</j:jelly>
